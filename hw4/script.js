@@ -61,7 +61,7 @@ const isUserAuth = () => {
   let userLogin;
   let userPassword;
 
-  for (let i = 3; i >= 0; i--) {
+  for (let i = 3; i >= 0;) {
     if (i == 0) {
       alert(`Oh no, you have ${i} attempts! Please reload page!`);
       break;
@@ -82,11 +82,13 @@ const isUserAuth = () => {
 
     if (!userPassword) {
       alert("Your data is empty!");
+      --i;
       continue;
     }
 
     if (userLogin !== LOGIN || userPassword !== PASSWORD) {
       alert("Incorrect data try again!");
+      --i;
       continue;
     } else {
       alert("Welcome!");
