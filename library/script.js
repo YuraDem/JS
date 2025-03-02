@@ -71,9 +71,7 @@ function library() {
 }
 
 function takeBook() {
-  const booksList = books
-    .map((book) => `${book.name} - ${book.isReading} - ${book.startCount}`)
-    .join("\n");
+  const booksList = books.map((book) => book.name).join("\n");
 
   let currentBookName = prompt(`Enter name or author you want: \n${booksList}`);
 
@@ -82,9 +80,21 @@ function takeBook() {
     return;
   }
 
-  currentBookName =
-    currentBookName[0].toUpperCase() +
-    currentBookName.slice(1).toLowerCase().trim();
+  const spaceIndex = currentBookName.indexOf(" ");
+
+  if (spaceIndex === -1) {
+    currentBookName =
+      currentBookName[0].toUpperCase() +
+      currentBookName.slice(1).toLowerCase().trim();
+  } else {
+    currentBookName =
+      currentBookName[0].toUpperCase() +
+      " " +
+      currentBookName
+        .slice(spaceIndex + 1)
+        .toLowerCase()
+        .trim();
+  }
 
   const selectedBook = books.find((book) => book.name === currentBookName);
   // console.log(selectedBook);
